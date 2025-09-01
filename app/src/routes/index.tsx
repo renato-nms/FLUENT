@@ -21,9 +21,12 @@ export default function Routes() {
       <Stack.Screen 
         name="Welcome" 
         component={Welcome} 
-        options={{ title: 'Bem-vindo' }} // título customizado
+        options={{ headerShown: false}} // título customizado
       />
-      <Stack.Screen name="SignIn" component={SignIn} />
+      <Stack.Screen
+       name="SignIn" 
+       component={SignIn}
+       options={{ headerShown: false}} />
     </Stack.Navigator>
   );
 }
