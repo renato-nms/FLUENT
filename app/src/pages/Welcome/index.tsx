@@ -1,9 +1,17 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 export default function Welcome() {
+  const navigation = useNavigation();
+
   return (
     <View style={styles.container}>
+      <TouchableOpacity
+      onPress={ () => navigation.goBack('Onboarding')}
+      activeOpacity={0.7}>
+        <Text style={styles.buttonText}>Go back</Text>
+      </TouchableOpacity>
       
       {/* Logo */}
       <View style={styles.containerLogo}>
@@ -22,6 +30,7 @@ export default function Welcome() {
         </TouchableOpacity>
 
         <TouchableOpacity style={styles.button}>
+          onPress {() => navigation.navigate('Register')}
           <Text style={styles.buttonText}>SIG-IN</Text>
         </TouchableOpacity>
       </View>

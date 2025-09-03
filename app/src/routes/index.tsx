@@ -2,12 +2,14 @@ import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Welcome from '../pages/Welcome';
 import SignIn from '../pages/SignIn';
+import Onboarding from '../pages/Onboarding';
 
 const Stack = createNativeStackNavigator();
 
 export default function Routes() {
   return (
     <Stack.Navigator
+    initialRouteName='Onboarding'
       screenOptions={{
         headerStyle: {
           backgroundColor: '#FF5733', // muda a cor do header
@@ -18,6 +20,11 @@ export default function Routes() {
         },
       }}
     >
+      <Stack.Screen
+      name="Onboarding"
+      component={Onboarding}
+      options={{ headerShown: false}}
+      />
       <Stack.Screen 
         name="Welcome" 
         component={Welcome} 
