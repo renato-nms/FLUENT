@@ -7,9 +7,11 @@ export default function Welcome() {
 
   return (
     <View style={styles.container}>
+      {/* Botão para voltar */}
       <TouchableOpacity
-      onPress={ () => navigation.goBack('Onboarding')}
-      activeOpacity={0.7}>
+        onPress={() => navigation.goBack()}
+        activeOpacity={0.7}
+      >
         <Text style={styles.buttonText}>Go back</Text>
       </TouchableOpacity>
       
@@ -19,19 +21,25 @@ export default function Welcome() {
           source={require('../../assets/dddd-Photoroom.png')}
           style={styles.logo}
           resizeMode="contain"
-          
         />
       </View>
 
       {/* Botões */}
       <View style={styles.containerButtons}>
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => navigation.navigate('Login')}
+          activeOpacity={0.7}
+        >
           <Text style={styles.buttonText}>LOG-IN</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.button}>
-          onPress {() => navigation.navigate('Register')}
-          <Text style={styles.buttonText}>SIG-IN</Text>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => navigation.navigate('Register')}
+          activeOpacity={0.7}
+        >
+          <Text style={styles.buttonText}>SIGN-IN</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -41,7 +49,7 @@ export default function Welcome() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff', // Fundo branco igual à imagem
+    backgroundColor: '#fff', 
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -59,10 +67,10 @@ const styles = StyleSheet.create({
     width: '100%',
     justifyContent: 'flex-start',
     alignItems: 'center',
-    gap: 20, // espaço entre botões
+    gap: 20,
   },
   button: {
-    backgroundColor: '#00AEEF', // azul igual da imagem
+    backgroundColor: '#00AEEF',
     borderRadius: 50,
     paddingVertical: 12,
     width: '70%',
@@ -73,6 +81,6 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: 'yellow',
     fontWeight: 'bold',
-    fontStyle: 'italic', // itálico igual ao print
+    fontStyle: 'italic',
   },
 });
