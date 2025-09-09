@@ -8,9 +8,6 @@ export default function Onboarding() {
 const navigation = useNavigation();
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>
-        Hello World
-            </Text>
             <Image 
             source={require('../../assets/dddd-Photoroom.png')}
             style={styles.logo}
@@ -23,8 +20,8 @@ const navigation = useNavigation();
             </View>
             <View style={styles.container_buttons}>
         <TouchableOpacity style={styles.button}
-        onPress={ () => navigation.navigate('Welcome')}
-        activeOpacity={0.7}>
+            onPress={ () => navigation.navigate('Welcome')}
+            activeOpacity={0.7}>
             <Text style={styles.textbutton}>Go to Welcome</Text>
         </TouchableOpacity >
 
