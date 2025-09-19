@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, StyleSheet, TextInput, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, TextInput, Image, TouchableOpacity } from "react-native";
 import * as Animatable from "react-native-animatable";
 import { useNavigation } from "@react-navigation/native";
 
@@ -8,14 +8,28 @@ export default function SignIn() {
 
   return (
     <View style={styles.container}>
+
+          {/* Logo animada */}
+          <Animatable.View 
+            animation="fadeInDown"   // entra de cima
+            duration={1200}
+            style={styles.containerLogo}
+          >
+            <Image
+              source={require('../../assets/dddd-Photoroom.png')}
+              style={styles.logo}
+              resizeMode="contain"
+            />
+          </Animatable.View>
+    
+
       {/* Cabeçalho animado */}
       <Animatable.View
         animation="fadeInLeft"
         delay={500}
         style={styles.containerHeader}
       >
-        <Text style={styles.message}>Let's Go!</Text>
-        <Text style={styles.step}>1 of 2</Text>
+        <Text style={styles.message}>You´re Welcome!</Text>
         <Text style={styles.subtitle}>
           Fill in your details so we can create your account securely.
         </Text>
@@ -23,14 +37,6 @@ export default function SignIn() {
 
       {/* Formulário animado */}
       <Animatable.View animation="fadeInUp" style={styles.containerForm}>
-        {/* Full Name */}
-        <Text style={styles.title}>Full name</Text>
-        <TextInput
-          placeholder="Enter your full name"
-          style={styles.input}
-          placeholderTextColor="#999"
-        />
-
         {/* Email */}
         <Text style={styles.title}>Email</Text>
         <TextInput
@@ -48,15 +54,6 @@ export default function SignIn() {
           placeholderTextColor="#999"
           secureTextEntry
         />
-
-        {/* Botão Next */}
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => navigation.navigate("Password")}
-          activeOpacity={0.7}
-        >
-          <Text style={styles.buttonText}>Next</Text>
-        </TouchableOpacity>
       </Animatable.View>
     </View>
   );
@@ -125,4 +122,14 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "bold",
   },
+    containerLogo: {
+    flex: 2,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+    logo: {
+        width: 400,
+        height: 400,
+    }
+
 });

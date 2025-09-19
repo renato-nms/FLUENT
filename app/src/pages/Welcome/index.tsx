@@ -1,30 +1,49 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import * as Animatable from 'react-native-animatable';
 
 export default function Welcome() {
+  const navigation = useNavigation();
+
   return (
     <View style={styles.container}>
-      
-      {/* Logo */}
-      <View style={styles.containerLogo}>
+      {/* Logo animada */}
+      <Animatable.View 
+        animation="fadeInDown"   // entra de cima
+        duration={1200}
+        style={styles.containerLogo}
+      >
         <Image
           source={require('../../assets/dddd-Photoroom.png')}
           style={styles.logo}
           resizeMode="contain"
-          
         />
-      </View>
+      </Animatable.View>
 
-      {/* Botões */}
-      <View style={styles.containerButtons}>
-        <TouchableOpacity style={styles.button}>
+      {/* Botões animados */}
+      <Animatable.View 
+        animation="fadeInUp"     // entra de baixo
+        duration={1200}
+        delay={400}              // começa depois da logo
+        style={styles.containerButtons}
+      >
+        <TouchableOpacity 
+          style={styles.button}
+          onPress={() => navigation.navigate('Login')}
+          activeOpacity={0.7}
+        >
           <Text style={styles.buttonText}>LOG-IN</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText}>SIG-IN</Text>
+        <TouchableOpacity 
+          style={styles.button}
+          onPress={() => navigation.navigate('SignIn')}
+          activeOpacity={0.7}
+        >
+          <Text style={styles.buttonText}>SIGN-IN</Text>
         </TouchableOpacity>
-      </View>
+      </Animatable.View>
     </View>
   );
 }
@@ -32,7 +51,7 @@ export default function Welcome() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff', // Fundo branco igual à imagem
+    backgroundColor: '#fff',
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -42,28 +61,29 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   logo: {
-    width: 200,
-    height: 200,
+    width: 400,
+    height: 400,
   },
   containerButtons: {
     flex: 1,
     width: '100%',
     justifyContent: 'flex-start',
     alignItems: 'center',
-    gap: 20, // espaço entre botões
+    gap: 20,
   },
   button: {
-    backgroundColor: '#00AEEF', // azul igual da imagem
+    backgroundColor: '#00AEEF',
     borderRadius: 50,
     paddingVertical: 12,
     width: '70%',
     alignItems: 'center',
     justifyContent: 'center',
+    alignSelf: 'center',
   },
   buttonText: {
     fontSize: 18,
     color: 'yellow',
     fontWeight: 'bold',
-    fontStyle: 'italic', // itálico igual ao print
+    fontStyle: 'italic',
   },
 });

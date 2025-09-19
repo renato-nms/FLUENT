@@ -1,10 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, Text, StyleSheet, TextInput, TouchableOpacity } from "react-native";
 import * as Animatable from "react-native-animatable";
 import { useNavigation } from "@react-navigation/native";
+import Checkbox from "expo-checkbox";
 
 export default function SignIn() {
   const navigation = useNavigation();
+  const [acceptedPrivacy, setAcceptedPrivacy] = useState(false);
+  const [acceptedTerms, setAcceptedTerms] = useState(false);
+
+  // botão só habilita quando os dois estão true
+  const isButtonEnabled = acceptedPrivacy && acceptedTerms;
 
   return (
     <View style={styles.container}>
@@ -14,23 +20,14 @@ export default function SignIn() {
         delay={500}
         style={styles.containerHeader}
       >
-        <Text style={styles.message}>Let's Go!</Text>
-        <Text style={styles.step}>1 of 2</Text>
+        <Text style={styles.message}>Almost there!</Text>
         <Text style={styles.subtitle}>
-          Fill in your details so we can create your account securely.
+          Create a password to access the platform securely
         </Text>
       </Animatable.View>
 
       {/* Formulário animado */}
       <Animatable.View animation="fadeInUp" style={styles.containerForm}>
-        {/* Full Name */}
-        <Text style={styles.title}>Full name</Text>
-        <TextInput
-          placeholder="Enter your full name"
-          style={styles.input}
-          placeholderTextColor="#999"
-        />
-
         {/* Email */}
         <Text style={styles.title}>Email</Text>
         <TextInput
@@ -49,13 +46,35 @@ export default function SignIn() {
           secureTextEntry
         />
 
-        {/* Botão Next */}
+        {/* Checkboxes */}
+        <View style={styles.checkboxRow}>
+          <Checkbox
+            value={acceptedPrivacy}
+            onValueChange={setAcceptedPrivacy}
+            color={acceptedPrivacy ? "#00bcd4" : undefined}
+          />
+          <Text style={styles.checkboxLabel}>I agree to the privacy terms</Text>
+        </View>
+
+        <View style={styles.checkboxRow}>
+          <Checkbox
+            value={acceptedTerms}
+            onValueChange={setAcceptedTerms}
+            color={acceptedTerms ? "#00bcd4" : undefined}
+          />
+          <Text style={styles.checkboxLabel}>
+            I have read and accept the terms of service
+          </Text>
+        </View>
+
+        {/* Confirm */}
         <TouchableOpacity
-          style={styles.button}
-          onPress={() => navigation.navigate("Password")}
+          style={[styles.button, !isButtonEnabled && styles.buttonDisabled]}
+          onPress={() => navigation.navigate("Login")}
           activeOpacity={0.7}
+          disabled={!isButtonEnabled}
         >
-          <Text style={styles.buttonText}>Next</Text>
+          <Text style={styles.buttonText}>Confirm</Text>
         </TouchableOpacity>
       </Animatable.View>
     </View>
@@ -75,12 +94,7 @@ const styles = StyleSheet.create({
   message: {
     fontSize: 24,
     fontWeight: "bold",
-    color: "#00bcd4", // azul
-  },
-  step: {
-    fontSize: 14,
-    color: "#666",
-    marginTop: 4,
+    color: "#00bcd4",
   },
   subtitle: {
     fontSize: 14,
@@ -112,6 +126,16 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: "#000",
   },
+  checkboxRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginTop: 15,
+  },
+  checkboxLabel: {
+    marginLeft: 8,
+    fontSize: 14,
+    color: "#333",
+  },
   button: {
     backgroundColor: "#00bcd4",
     width: "100%",
@@ -120,8 +144,11 @@ const styles = StyleSheet.create({
     marginTop: 30,
     alignItems: "center",
   },
+  buttonDisabled: {
+    backgroundColor: "#ccc",
+  },
   buttonText: {
-    color: "#fff",
+    color: "yellow",
     fontSize: 16,
     fontWeight: "bold",
   },
